@@ -12,7 +12,6 @@ struct CharacterDetailView: View {
     
     var body: some View {
         VStack {
-            
             VStack {
                 HStack {
                     Text(character.name)
@@ -28,25 +27,28 @@ struct CharacterDetailView: View {
             .padding()
             .background(houseColor(character.house ?? ""))
             .cornerRadius(12)
-            .shadow(color: houseColor(character.house ?? "").opacity(0.6), radius: 10, x: 0, y: 5)
+            .shadow(radius: 5)
+            
+            // Character Image
             AsyncImage(url: URL(string: character.image ?? "")) { image in
                 image.resizable()
                     .scaledToFit()
                     .frame(height: 200)
                     .cornerRadius(12)
-                    .shadow(color: houseColor(character.house ?? "").opacity(0.8), radius: 10, x: 0, y: 5)
+                    .shadow(radius: 5)
             } placeholder: {
                 ProgressView()
             }
             .padding(.vertical)
-           
-           
             VStack(spacing: 15) {
                 if let species = character.species {
                     DetailRow(title: "Species", value: species)
                 }
                 if let gender = character.gender {
                     DetailRow(title: "Gender", value: gender)
+                }
+                if let ancestry = character.ancestry {
+                    DetailRow(title: "Ancestry", value: ancestry)
                 }
                 if let house = character.house {
                     DetailRow(title: "House", value: house)
@@ -56,15 +58,17 @@ struct CharacterDetailView: View {
                 if let dateOfBirth = character.dateOfBirth {
                     DetailRow(title: "Date of Birth", value: formatDateOfBirth(dateOfBirth))
                 }
+                if let patronus = character.patronus {
+                    DetailRow(title: "Patronus", value: patronus)
+                }
+                if let alive = character.alive {
+                    DetailRow(title: "Alive/Deceased", value: alive ? "Alive" : "Deceased")
+                }
             }
             .padding()
             .background(Color.white.opacity(0.8))
             .cornerRadius(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.white.opacity(0.3), lineWidth: 1)
-            )
-            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
+            .shadow(radius: 5)
             .padding(.horizontal)
         }
         .padding(.bottom, 20)

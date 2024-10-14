@@ -28,7 +28,7 @@ class CharacterListViewModel: ObservableObject {
 }
 
 struct Character: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     let name: String
     let image: String?
     let species: String?
@@ -36,4 +36,7 @@ struct Character: Identifiable, Codable {
     let house: String?
     let dateOfBirth: String?
     let hogwartsStaff: Bool?
+    let alive: Bool?
+    let patronus: String?
+    let ancestry: String?
 }
